@@ -135,7 +135,7 @@ const login = (userObject) => {
 };
 
 const getLoggedInUser = (token) => {
-  return fetch("${PROD_API}api/current_user/", {
+  return fetch(`${PROD_API}api/current_user/`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `JWT ${token}`,
@@ -144,7 +144,7 @@ const getLoggedInUser = (token) => {
 };
 
 const signupUser = (userObject) => {
-  return fetch("${PROD_API}api/user/", {
+  return fetch(`${PROD_API}api/user/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
