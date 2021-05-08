@@ -26,12 +26,12 @@ const AllProjectsPage = () => {
         <ul className="list-container">
           {projects.map((project) => {
             return (
-              <>
-                <li key={project.id}>
+              <div key={project.id}>
+                <li>
                   <Link to={`/projects/${project.id}`}>{project.name}</Link>
                 </li>
                 <hr />
-              </>
+              </div>
             );
           })}
         </ul>
