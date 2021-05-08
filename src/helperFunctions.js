@@ -1,4 +1,6 @@
 const USERTOKEN = localStorage.getItem("auth-user");
+const DEV_API = "http://localhost:8000/";
+const PROD_API = "https://bug-ticket-tracker.herokuapp.com/";
 
 const fetchAll = async (model) => {
   // Accepts a string "model" that represents the data model you want to fetch from the database
@@ -10,10 +12,7 @@ const fetchAll = async (model) => {
       Authorization: `JWT ${USERTOKEN}`,
     },
   };
-  const response = await fetch(
-    `http://localhost:8000/api/${model}/`,
-    requestData
-  );
+  const response = await fetch(`${PROD_API}api/${model}/`, requestData);
   const data = await response.json();
   return data; // Returns a promise
 };
@@ -28,10 +27,7 @@ const fetchDetail = async (model, id) => {
       Authorization: `JWT ${USERTOKEN}`,
     },
   };
-  const response = await fetch(
-    `http://localhost:8000/api/${model}/${id}/`,
-    requestData
-  );
+  const response = await fetch(`${PROD_API}api/${model}/${id}/`, requestData);
   const data = await response.json();
   return data; // Returns a promise
 };
@@ -50,10 +46,7 @@ const postToServer = async (model, dataObj) => {
       },
       body: JSON.stringify(dataObj),
     };
-    const response = await fetch(
-      `http://localhost:8000/api/${model}/`,
-      requestData
-    );
+    const response = await fetch(`${PROD_API}api/${model}/`, requestData);
     const data = await response.json();
     return data; // Returns new database entry
   } catch (err) {
@@ -74,10 +67,7 @@ const putToServer = async (model, id, dataObj) => {
       },
       body: JSON.stringify(dataObj),
     };
-    const response = await fetch(
-      `http://localhost:8000/api/${model}/${id}/`,
-      requestData
-    );
+    const response = await fetch(`${PROD_API}api/${model}/${id}/`, requestData);
     const data = await response.json();
     return data; // Returns new database entry
   } catch (err) {
@@ -98,10 +88,7 @@ const patchToServer = async (model, id, dataObj) => {
       },
       body: JSON.stringify(dataObj),
     };
-    const response = await fetch(
-      `http://localhost:8000/api/${model}/${id}/`,
-      requestData
-    );
+    const response = await fetch(`${PROD_API}api/${model}/${id}/`, requestData);
     const data = await response.json();
     return data; // Returns new database entry
   } catch (err) {
@@ -118,10 +105,7 @@ const deleteFromServer = async (model, id) => {
         Authorization: `JWT ${USERTOKEN}`,
       },
     };
-    const response = await fetch(
-      `http://localhost:8000/api/${model}/${id}/`,
-      requestData
-    );
+    const response = await fetch(`${PROD_API}api/${model}/${id}/`, requestData);
     return "item successfully deleted";
   } catch (error) {
     console.error(
@@ -141,7 +125,7 @@ const fetchGitHub = async (username) => {
 
 // User Authentication requests
 const login = (userObject) => {
-  return fetch("http://localhost:8000/token-auth/", {
+  return fetch(`${PROD_API}token-auth/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -151,7 +135,7 @@ const login = (userObject) => {
 };
 
 const getLoggedInUser = (token) => {
-  return fetch("http://localhost:8000/api/current_user/", {
+  return fetch("${PROD_API}api/current_user/", {
     headers: {
       "Content-Type": "application/json",
       Authorization: `JWT ${token}`,
@@ -160,7 +144,7 @@ const getLoggedInUser = (token) => {
 };
 
 const signupUser = (userObject) => {
-  return fetch("http://localhost:8000/api/user/", {
+  return fetch("${PROD_API}api/user/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
